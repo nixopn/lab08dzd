@@ -1,0 +1,47 @@
+name: CMake_Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Set up MSVC
+      uses: msys2/setup-msys2@v2
+    
+    - name: Build a formatter library gcc
+      run: |
+        cmake -H. -B_build -G "Visual Studio 16 2019" 
+        cmake --build _build --config Release
+      shell: bash
+      working-directory: formatter_lib
+      
+    - name: Build a formatter_ex library clang
+      run: |
+        cmake -H. -B_build -G "Visual Studio 16 2019" 
+        cmake --build _build --config Release
+      shell: bash
+      working-directory: formatter_ex_lib
+      
+    - name: Build a hello_world application gcc
+      run: |
+        cmake -H. -B_build -G "Visual Studio 16 2019" 
+        cmake --build _build --config Release
+      shell: bash
+      working-directory: hello_world_application
+      
+    - name: Build a solver application clang
+      run: |
+        cmake -H. -B_build -G "Visual Studio 16 2019" 
+        cmake --build _build --config Release
+      shell: bash
+      working-directory: solver_application
