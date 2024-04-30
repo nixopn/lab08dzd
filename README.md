@@ -8,7 +8,7 @@
 сборка на операционной системе Windows
 
 Сборка на Linux (Ubuntu)
-
+`````sh
 name: CMake_Build
 
 on:
@@ -56,10 +56,11 @@ jobs:
         cmake --build _build
       shell: bash
       working-directory: solver_application
+`````
 
 Сборка на windows
 
-
+`````sh
 name: CMake_Build
 
 on:
@@ -107,3 +108,4 @@ jobs:
         cmake --build _build
       shell: bash
       working-directory: solver_application
+`````
